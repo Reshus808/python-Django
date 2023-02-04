@@ -1,0 +1,68 @@
+{% extends 'navbar.html' %}
+{% block title %} My Cart Tracker{% endblock %}
+
+{% block body %}
+    <!-- display all details -->
+    <div class="container my-3" align="center">
+      <div class="alert alert-info" role="alert">
+        <!-- Customer details -->
+        <h1> Customer Details </h1>
+        <h5>
+        <table border="1">
+          <tr>
+            <td>Order Id:</td> <td>{{ order.order_id }}</td>
+          </tr>
+          <tr>
+            <td>Items :</td> <td>{{ order.items_json }}</td> 
+          </tr>
+          <tr>
+            <td>Name :</td><td>{{ order.name }}</td>
+            <!-- Email Id :<td>{{ order.email }}</td> -->
+          </tr>
+          <tr>
+            <td>Email Id :</td><td>{{ order.email }}</td>
+          </tr>
+          <tr>
+            <td>Address :</td><td>{{ order.address }}</td>
+          </tr>
+          <tr>
+            <td>City :</td><td>{{ order.city }}</td>
+          </tr>
+          <tr>
+            <td>State Id :</td><td>{{ order.state }}</td>
+          </tr>
+          <tr>
+            <td>Zip Coce :</td><td>{{ order.zip_code }}</td>
+          </tr>
+          <tr>
+            <td>Phone :</td><td>{{ order.phone }}</td>
+          </tr>
+        </table>
+      </h5>
+      </div>
+      <!-- order details -->
+        <div class="alert alert-danger" role="alert">
+            <h1> Order Details </h1>
+            <h3>
+            <table border="1">
+              <tr>
+                <th>Id </th>
+                <th>Order Id </th>
+                <th>Details</th>
+                <th>Date Time</th>
+              </tr>
+              {% for ord in updates %}
+              <tr>
+                <td>{{ ord.update_id }}</td>
+                <td>{{ ord.order_id }}</td>
+                <td>{{ ord.update_desc }}</td>
+                <td>{{ ord.timestamp }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </h3>
+          </div>
+
+    </div>
+    <!-- display all details -->
+{% endblock %}

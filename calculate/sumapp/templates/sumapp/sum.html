@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+   <title>Hello, world!</title>
+   <style>
+       .jumbotron{
+           margin-top: 100px;
+           background-color:blueviolet ;
+           color:rgb(214, 173, 214);
+           width: 800px;
+           height: 420px;
+       }
+       body{
+           background:url('https://images.unsplash.com/photo-1598449356475-b9f71db7d847?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDM1fDZzTVZqVExTa2VRfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+           background-size: cover;
+           background-repeat: no-repeat;
+       }
+   </style>
+  </head>
+  <body>
+    <!--navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">Sumapp.com</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link" href="sum/">Sum</a>
+              </li>
+            
+          <li class="nav-item">
+              <a class="nav-link" href="/">Logout</a>
+            </li>
+         </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+  <!--navbar-->
+  <!--alert-->
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <strong>Welcome !!!</strong> You should check in on some of those fields below.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+<!--alert-->
+      <!--jumboton-->
+      <div class="container" align="center">
+      <div class="jumbotron">
+        
+        <h1>! Sum of two number  !</h1>
+        <hr class="my-4">
+        <!--login page-->
+        <form action="calculate" method="POST">
+          {% csrf_token %}
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label"><h5>First Number</h5></label>
+              <div class="col-sm-10">
+                <input name="fn" type="first" class="form-control" id="inputEmail3" placeholder="Enter First Number" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-2 col-form-label"><h5>Second Number</h5></label>
+              <div class="col-sm-10">
+                <input name="sn" type="second" class="form-control" id="inputPassword3" placeholder="Enter Second Number">
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                       <br>
+                      <button type="submit" class="btn btn-primary"><h5>Result</h5></button>
+                      &nbsp;&nbsp;
+                      <button type="reset" class="btn btn-primary"><h5>Reset</h5></button>
+                      &nbsp;&nbsp;
+                      <a class="btn btn-primary btn-lg" href="/" role="button">Back</a>
+
+                      
+                    </div>
+                </div>
+              </div>
+            </div>
+          </form>
+    
+     <!--login page-->
+      <!--jumboton-->
+
+    
+  </body>
+</html>

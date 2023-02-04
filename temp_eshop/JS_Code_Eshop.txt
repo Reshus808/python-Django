@@ -1,0 +1,215 @@
+Java Script Code
+
+to be placed before body close </body>
+
+
+code
+=========
+{% block js %}
+<script>
+console.log('working')
+if(localStorage.getItem('cart') == null)
+{
+var cart={};
+}
+else{
+cart= JSON.parse(localstorage.getItem('cart'));
+}
+
+</script>
+{% endblock%}
+
+explanation
+=========
+To create a shopping cart, first of all, we need to include a block of javascript in the basic.html file. So, open the basic.html file and type the below code :
+
+After doing this, open the index.hitml and type the above code :
+
+
+In the above code, we are using an if-else loop to check whether the cart exists or not. If the cart does not exist, then we are creating an empty dictionary named cart. Otherwise, we are loading the cart with the help of the JSON.parse function. After doing this, restart the development server and click on the console option of the chrome developer tools. If you see a screen like the below image, then we are on the same page.
+
+<script>
+console.log('working')
+if(localStorage.getItem('cart') == null)
+{
+var cart={};
+}
+else{
+cart= JSON.parse(localstorage.getItem('cart'));
+}
+//jQuery starts here//
+$('.cart').click(function(){
+
+console.log('clicked');
+});
+</script>
+
+In the above code, we are selecting the cart with the help of a jQuery selector and running the click function over it. After doing this, replace all the <a href="#" class="btn btn-primary">Add to Cart</a>--> with <button class="btn btn-primary cart">Add To Cart</button>.  Here, we are assigning the cart class to the buttons so that we can apply jQuery selectors on the buttons. After doing this restart the development server and head over to the console. Now, click on any "Add To Cart" button, you will notice that every time you click on the button, clicked function gets incremented by 1. You can also notice the same thing in the below image, I clicked on "Add To Cart" button fifteen times and clicked function is returning 15.
+
+Now, we will give ids to the buttons. So, open the index.html and type the below code for the  <div class="carousel-item active"> :
+
+ <button id="pr{{product.0.id}}" class="btn btn-primary cart">Add To Cart</button>
+
+After doing this, type the below code for the button inside the for loop.
+
+  <button id= "pr{{i.id}}"class="btn btn-primary cart">Add To Cart</button>>
+
+Now type the following jQuery :
+
+$('.cart').click(function(){
+
+console.log('clicked');
+var idStr= this.id.toString();
+console.log(idStr);
+});
+
+
+In the above code, first, we are storing the id of the clicked button in a variable called idStr and then we printing this variable on console. Restart the development server and click on different "Add To Cart" buttons. You will notice every time you click on button the id of the button get displayed on the console. You can see the same in the below image :
+
+$('.cart').click(function(){
+
+console.log('clicked');
+var idstr= this.id.toString();
+console.log(idstr);
+if(cart[idstr]!= undefined) {
+cart[idstr] = cart[idstr]+1;
+}
+else{
+cart[idstr] = 1;
+}
+console.log(cart);
+});
+
+In the above image, you can see that the number of items corresponding to the ids are displayed on the console. But, if we reload the page again the all the information printed on the console will be lost. So, we need to update the cart in local storage. Type the below code :
+
+$('.cart').click(function(){
+
+console.log('clicked');
+var idstr= this.id.toString();
+console.log(idstr);
+if(cart[idstr]!= undefined) {
+cart[idstr] = cart[idstr]+1;
+}
+else{
+cart[idstr] = 1;
+}
+console.log(cart);
+localStorage.setItem('cart', JSON.stringify(cart));
+});
+
+
+
+<!-- self to display image JavaScript function  -->
+    <script>
+        //change image mode id
+        function showModelwithImage(imageUrl)
+        {
+
+            $('#image-modal').modal('show')
+            $("#image-show").attr('src',`/media/${imageUrl}`)
+
+
+        }
+    </script>
+   
+    <!-- self to display image JavaScript function  -->
+     <!-- To aadd cart code    -->
+     <script>
+        console.log('working')
+        if(localStorage.getItem('cart') == null)
+        {
+        var cart={};
+        }
+        else{
+        cart= JSON.parse(localStorage.getItem('cart'));
+        //to disply total count of items on cart top menu
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        updateCart(cart);
+        }
+        //jQuery starts here//
+        $('.cart').click(function(){
+        console.log('clicked');
+        var idstr= this.id.toString();
+        console.log(idstr);
+        if(cart[idstr]!= undefined) {
+        cart[idstr] = cart[idstr]+1;
+        }
+        else{
+        cart[idstr] = 1;
+        }
+        updateCart(cart);
+        console.log(cart);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        //to disply total count of items on cart top menu
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        });
+
+
+        //to add and activate popover on cart on navbar  
+        $('#popcart').popover();
+        document.getElementById("popcart").setAttribute('data-content', '<h5>Cart for your items in my shopping cart</h5>');
+
+        
+
+        function updateCart(cart) {
+          var sum=0;
+        for (var item in cart) {
+          sum = sum + cart[item];
+          document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        //document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        document.getElementById('cart').innerHTML = sum;
+        console.log(cart);
+        updatePopover(cart);
+        }
+
+        // If plus or minus button is clicked, change the cart as well as the display value
+$('.divpr').on("click", "button.minus", function() {
+    a = this.id.slice(7, );
+    cart['pr' + a] = cart['pr' + a] - 1;
+    cart['pr' + a] = Math.max(0, cart['pr' + a]);
+    document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    updateCart(cart);
+});
+$('.divpr').on("click", "button.plus", function() {
+    a = this.id.slice(6, );
+    cart['pr' + a] = cart['pr' + a] + 1;
+    document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+    updateCart(cart);
+});
+
+function updatePopover(cart)
+{
+  
+    var popStr = "";
+    popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+    var i = 1;
+    for (var item in cart){
+        popStr = popStr + "<b>" + i + "</b>. ";
+        popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item] + '<br>';
+        i = i+1;
+    }
+    popStr = popStr + "</div>";
+    popStr = popStr + "<a href='/checkout'> <button class='btn btn-primary' id='checkout'>Checkout </button></a> <button class='btn btn-primary' onclick='clearCart()'  id='clearCart'>Clear Cart</button> ";
+    console.log(popStr);
+    document.getElementById('popcart').setAttribute('data-content', popStr);
+    $('#popcart').popover('show');
+}
+function clearCart() {
+        cart = JSON.parse(localStorage.getItem('cart'));
+        for (var item in cart) {
+            document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>'
+        }
+        localStorage.clear();
+        cart = {};
+        updateCart(cart);
+        }
+
+
+        </script>
+     <!-- To aadd cart code    -->
+
+  </body>
+</html>
+

@@ -1,0 +1,101 @@
+{% extends 'navbar.html' %}
+
+{% block title %}
+
+Hello, world! SignUp Page
+
+{% endblock %}
+
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<!-- signup form design  -->
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-5 mx-auto border rounded pt-4 pb-4">
+            <h3>
+                <div class="alert alert-success" role="alert">
+                Create An Account
+                </div>
+            </h3>
+            <form action="/signup" method="POST">
+                {% csrf_token %}
+                {% if error %}
+                <h5>
+                    <div class="alert alert-danger" role="alert">
+                    
+                    {{error}}
+                    
+                    </div>
+                </h5>
+                {% endif %}
+            <!-- FirstName -->
+            <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input name="firstname" type="text" 
+                class="form-control" 
+                id="firstname" placeholder="First Name">
+            </div>
+            <!-- FirstName -->
+            <!-- Last Name -->
+            <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input name="lastname" type="text" 
+                class="form-control" 
+                id="lastname" placeholder="Last Name">
+            </div>
+            <!-- Last Name -->
+            <!-- Phone No -->
+            <div class="form-group">
+                <label for="phone">Phone No</label>
+                <input name="phone" type="text" 
+                class="form-control" 
+                id="phone" placeholder="(91)-1234567890">
+            </div>
+            <!-- Last Name -->
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email Id</label>
+                <input name="email" type="email" 
+                class="form-control" 
+                id="email" placeholder="example@gmail.com">
+            </div>
+            <!-- Email -->
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input name="password" type="password" 
+                class="form-control" 
+                id="password" placeholder="*********">
+            </div>
+            <!-- Password -->
+            <!-- Password1 -->
+            <div class="form-group">
+                <label for="password1">ReEnter Password</label>
+                <input name="password1" type="password" 
+                class="form-control" 
+                id="password1" placeholder="*********">
+            </div>
+            <!-- Password1 -->
+            
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- signup form design  -->
+
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock %}
+
+

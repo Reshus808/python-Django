@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        body{
+            background:url('https://images.unsplash.com/photo-1605723517503-3cadb5818a0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        table{
+            width: 750px;
+        }
+        .jumbotron{
+            width: 900px;
+            background-color:rgb(34, 181, 218);
+            margin-top: 100px;
+            height: 350px;
+        }
+        h1{
+            background-color:lightpink;
+            margin-bottom: 30px;
+        }
+    </style>
+  </head>
+  <body>
+      {% include 'myapp/navbar.html' %}
+    <!-- Navbar -->
+    <!-- display all details -->
+    <div class="container" align="center">
+        <div class="jumbotron">
+        <div class="alert alert-danger" role="alert">
+            <h1>!! Student Update Details !!</h1>
+            <h3>
+            <table border="1">
+              <tr>
+                <th>Id </th>
+                <th>Roll Number </th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Address </th>
+                <th>Action </th>
+              </tr>
+              {% for std in S1 %}
+              <tr>
+                <td>{{ std.id }}</td>  
+                <td>{{ std.Roll }}</td>
+                <td>{{ std.Name }}</td>
+                <td>{{ std.Marks }}</td>
+                <td>{{ std.Address }}</td>
+                <td><a href="/editrecord/{{std.id}}">Update</a></td>
+              </tr>
+              {% endfor %}
+            </table>
+          </h3>
+          </div>
+</div>
+    </div>
+    <!-- display all details -->
+
+    
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

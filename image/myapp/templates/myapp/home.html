@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        .bg{
+            background: #3f51b5!important;
+        }
+        .list-group-item.active{
+            background: #3f51b5!important;
+            border-color:#3f51b5!important;
+        }
+        .card-img-top{
+          height:300px;
+          width:300px;
+        }
+
+    </style>
+  </head>
+  <body>
+      <!-- Nav bar  -->
+      {% include 'myapp/navbar.html' %}
+      <!-- Nav bar  -->
+    <!-- Main code to display categories and images  -->
+    <div class="row">
+      <!-- To display categories-->
+      <div class="col-md-2">
+          <div class="list-group mt-3">
+              <a href="/" class="list-group-item list-group-item-action active" aria-current="true">
+                All Images
+              </a>
+              <a href="/" class="list-group-item list-group-item-action" aria-current="true">
+                Cloth - Men
+              </a>
+              <a href="/" class="list-group-item list-group-item-action" aria-current="true">
+                Cloth - Women
+              </a>
+             <a href="/category/{{c.pk}}" class="list-group-item list-group-item-action">{{ c.title }}</a>
+            
+            </div>
+      </div>
+      <!-- To display images-->
+      <div class="col-md-10">
+    
+          <div class="row mt-3">
+              <div class="col-12">
+                  <div class="card-columns">
+                    
+    
+                      <div class="card mx-auto mb-3">
+                          <img src="/media/{{i.image}}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title" id="namepr{{i.id}}">{{ i.title }}</h5>
+                            <p class="card-text">ID:{{ i.id }}</p>
+                            <p class="card-text">{{ i.description|slice:"0:53"}}...</p>
+                            <p class="card-text">Rs. {{ i.price }}</p>
+                            <!-- <p class="card-text">{{ i.image }}</p> -->
+                            <!-- view button -->
+                            <a href="#" class="btn btn-primary" onclick="showModelwithImage('{{ i.image }}')">View</a>
+                            <!-- Quick view button -->
+                            <a href="/productview/{{i.id}}" <button id="qv{{i.id}}" class="btn btn-primary cart">Quick View</button></a>
+                            <!-- Add to cart button -->
+                            <span id="divpr{{i.id}}" class="divpr">
+                              <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button>
+                            </span>
+                          </div>
+                        </div>
+    
+    
+                  </div>
+              </div>
+          </div>
+          
+    
+      </div>
+    </div>
+    
+    <!-- Main code to display categories and images  -->
+    
+    <!-- to display big image using model -->
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="image-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">My EShop</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="#!" id="image-show" class="img-fluid">
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!--
+        <button type="button" class="btn btn-primary">Save changes</button>
+        -->
+      </div>
+    </div>
+    </div>
+    </div>
+    <!-- to display big image using model -->
+    
+    
+    
+    
+    <!-- self to display image "view" button JavaScript function  -->
+    <script>
+      //change image mode id
+      function showModelwithImage(imageUrl)
+      {
+          $('#image-modal').modal('show')
+          $("#image-show").attr('src',`/media/${imageUrl}`)
+      }
+    
+    //<!-- self to display image "view" button JavaScript function  -->
+    
+    //<!-- To add cart code    -->
+    
+      // Find out the cart items from localStorage
+      if (localStorage.getItem('cart') == null) {
+          var cart = {};
+      } else {
+          cart = JSON.parse(localStorage.getItem('cart'));
+          updateCart(cart);
+      }
+      // If the add to cart button is clicked, add/increment the item
+      //$('.cart').click(function() {
+          $('.divpr').on('click', 'button.cart', function(){
+          var idstr = this.id.toString();
+          if (cart[idstr] != undefined) {
+              //cart[idstr] = cart[idstr] + 1;
+              qty=cart[idstr][0]+1
+          } else {
+              //cart[idstr] = 1;
+              qty=1
+              name=document.getElementById('name'+idstr).innerHTML
+              cart[idstr]=[qty,name]
+          }
+          updateCart(cart);
+      });
+      //Add Popover to cart
+      $('#popcart').popover();
+       updatePopover(cart);
+    
+       function updatePopover(cart) {
+          console.log('We are inside updatePopover');
+          var popStr = "";
+          popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+          var i = 1;
+          for (var item in cart) {
+              popStr = popStr + "<b>" + i + "</b>. ";
+              popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+              i = i + 1;
+          }
+          popStr = popStr + "</div>";
+          popStr = popStr + " <b><a href='/checkout'> CheckOut <button class='btn btn-primary' id ='checkout'>Checkout</button></a></b>";
+          popStr = popStr+  "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><a href='/clearcart'> Clear Cart <button class='btn btn-primary' id ='checkout'>Checkout</button></a></b";
+          console.log(popStr);
+          document.getElementById('popcart').setAttribute('data-content', popStr);
+          $('#popcart').popover('show');
+      }
+      //to clear the cart
+      function clearCart() {
+           cart = JSON.parse(localStorage.getItem('cart'));
+           for (var item in cart) {
+               document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>'
+           }
+           localStorage.clear();
+           cart = {};
+           updateCart(cart);
+       }
+    
+    
+      function updateCart(cart) {
+          var sum = 0;
+          for (var item in cart) {
+              sum = sum + cart[item][0];
+              document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "'>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+          }
+          localStorage.setItem('cart', JSON.stringify(cart));
+          document.getElementById('cart').innerHTML = sum;
+          console.log(cart);
+          updatePopover(cart);
+      }
+    
+      // If plus or minus button is clicked, change the cart as well as the display value
+      $('.divpr').on("click", "button.minus", function() {
+        console.log("minus clicked");
+          a = this.id.slice(7, );
+          cart['pr' + a][0] = cart['pr' + a][0] - 1;
+          cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+          document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+          updateCart(cart);
+      });
+      $('.divpr').on("click", "button.plus", function() {
+        console.log("plus clicked");
+          a = this.id.slice(6, );
+          cart['pr' + a][0] = cart['pr' + a][0] + 1;
+          document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+          updateCart(cart);
+      });
+    
+    
+      
+       
+      
+      
+      </script>
+    <!-- To aadd cart code    -->
+    
+   
+    
+    
+    <!-- Main code to display categories and images  -->
+
+    <!-- to display big image using model -->
+    
+  
+  <!-- Modal -->
+  <div class="modal fade" id="image-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">My EShop</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img src="#!" id="image-show" class="img-fluid">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <!--
+          <button type="button" class="btn btn-primary">Save changes</button>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- to display big image using model -->
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    -->
+
+    <!-- self to display image JavaScript function  -->
+    <!-- <script>
+        //change image mode id
+        function showModelwithImage(imageUrl)
+        {
+
+            $('#image-modal').modal('show')
+            $("#image-show").attr('src',/media/${imageUrl})
+
+
+        }
+    </script> -->
+   
+    <!-- self to display image JavaScript function  -->
+     
+
+  </body>
+</html>

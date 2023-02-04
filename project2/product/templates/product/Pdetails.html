@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        form{
+            margin-top: 40px;
+            color:yellow;
+        }
+        body{
+          background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThphDHfHk5JNvrO8izQXa5tk8MYsv7p7ywkw&usqp=CAU');
+            background-size: cover;
+            background-repeat: no-repeat;
+       }
+       .jumbotron{
+         margin-top: 100px;
+         background-color:rgb(119, 155, 209);
+       }
+    </style>
+  </head>
+  <body>
+    
+<!--Form design-->
+    <div class="container">
+
+      
+        <center>
+          <h1 style="margin-top: 40px;" class="alert alert-primary">!! Product Register !!</h1>
+  
+      </center>
+
+       <!--Name-->
+             <form action="chk_product" method="POST">
+               {% csrf_token %}
+      
+      
+        <label for="formGroupExampleInput">Product_Name</label>
+        <input name="pn" type="text" class="form-control" id="formGroupExampleInput" placeholder="Product Name"><br>
+  
+        <label for="formGroupExampleInput">Product_Code</label>
+        <input name="pc" type="text" class="form-control" id="formGroupExampleInput" placeholder="Product Code"><br>
+
+     
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Product_Brand</label>
+        <select name="pb" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" placeholder="Product Brand">
+          <option selected>Choose...</option>
+          <option value="MI">MI</option>
+          <option value="REALME">REALME</option>
+          <option value="ASUS">ASUS</option>
+        </select><br>
+    
+        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Product_Quality</label>
+        <select name="pq" class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" placeholder="Product Quality">
+          <option selected>Choose...</option>
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+          <option value="3rd">3rd</option>
+        </select><br>
+       <div class="form-group">
+        <label for="formGroupExampleInput">Manufacturing_Date</label>
+        <input name="mfd" type="text" class="form-control" id="formGroupExampleInput" placeholder="mfd">
+      </div><br>
+      <div class="form-group">
+        <label for="formGroupExampleInput">Price_Per_Unit</label>
+        <input name="pu" type="text" class="form-control" id="formGroupExampleInput" placeholder="Price Per Unit">
+      </div>
+    <br>
+      <button type="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;&nbsp;
+      <button type="reset" class="btn btn-primary">Reset</button>
+
+    </form>
+</div>
+          
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

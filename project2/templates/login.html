@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+   <title>Hello, world!</title>
+   <style>
+       /* .jumbotron{
+           margin-top: 100px;
+           background-color:rgb(230, 210, 38) ;
+           color:rgb(37, 28, 37);
+           width: 800px;
+           height: 420px;
+       } */
+       body{
+           background:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkOK-PR-0pM7-cH1UgPd37lVs4YNySvQdEgw&usqp=CAU');
+           background-size: cover;
+           background-repeat: no-repeat;
+           color: crimson;
+           margin-top: 200px;
+       }
+   </style>
+  </head>
+  <body>
+      <!--jumboton-->
+      <!--login page-->
+      <div class="container">
+          
+            <div class="container" align="center">
+                 <form action="chk_login" method="POST">
+                     {% csrf_token %}
+                         <h1>LOGIN HERE</h1>
+                       <div class="col-sm-5">
+                                     <input name="em" type="email" class="form-control" id="inputEmail3" placeholder="Your Email Address">
+                       </div><br>
+                      <div class="col-sm-5">
+                                    <input name="pa" type="password" class="form-control" id="inputPassword3" placeholder=" Your Password">
+                      </div> <br>
+                      <div class="col-auto">
+                      <div class="form-check mb-4">
+                                 <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                                  <label class="form-check-label" for="autoSizingCheck">Remember Me</label>
+                       </div>
+                        </div><br>
+                             <button type="submit" class="btn btn-primary">Submit</button>
+                                  &nbsp; &nbsp;
+                               <button type="reset" class="btn btn-primary">Reset</button>
+                      </form>
+            </div>
+            
+      </div>
+     <!--login page-->
+      <!--jumboton-->
+
+    
+  </body>
+</html>
+
+
+
+
