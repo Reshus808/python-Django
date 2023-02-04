@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h1>Show Data</h1>
+
+<a href="/add">Add New</a>
+<table border="1px solid black">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+{% for s in student %}
+
+    <tr>
+        <td>{{s.id}}</td>
+        <td>{{s.name}}</td>
+        <td>{{s.email}}</td>
+        <td>{{s.address}}</td>
+        <td><a href="edit/{{s.id}}">Edit</a></td>
+        <td><a href="delete/{{s.id}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
